@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import SessionProvider from "../components/dashboard/SessionProvider";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,24 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.className}>
-        <SessionProvider session={session}>
-          {/* Fixed Navbar */}
-          <Navbar />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SessionProvider session={session}>
+            {/* Fixed Navbar */}
+            <Navbar />
 
-          {/* Main Content with padding to account for fixed navbar */}
-          <main className="min-h-screen">
-            {children}
-          </main>
-        </SessionProvider>
+            {/* Main Content with padding to account for fixed navbar */}
+            <main className="min-h-screen pt-16">
+              {children}
+            </main>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

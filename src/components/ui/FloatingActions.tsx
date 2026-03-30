@@ -27,7 +27,7 @@ export function FloatingActions() {
         });
     };
 
-    const whatsappNumber = "919778754400"; // Based on the footer phone number
+    const whatsappNumber = "919791658349"; // Based on the footer phone number
     const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
     return (
@@ -59,7 +59,7 @@ export function FloatingActions() {
                 aria-label="Chat on WhatsApp"
             >
                 <MessageCircle className="w-8 h-8 fill-current" />
-                <span className="absolute right-full mr-4 bg-white text-gray-900 px-3 py-1 rounded-lg text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                <span className="absolute right-full mr-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-1 rounded-lg text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                     Chat with us
                 </span>
                 {/* Pulse effect */}

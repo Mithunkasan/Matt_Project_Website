@@ -62,6 +62,5 @@ export const config = {
     "/browse/:path*",
     "/api/projects/:path*",
     "/api/classes/:path*",
-    "/api/workshops/:path*",
   ],
 };

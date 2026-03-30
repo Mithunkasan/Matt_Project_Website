@@ -6,7 +6,7 @@
 //       <div className="relative">
 //         {/* Outer rotating ring */}
 //         <div className="w-20 h-20 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-        
+
 //         {/* Company Logo in center */}
 //         <div className="absolute inset-0 flex items-center justify-center">
 //           <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -54,16 +54,16 @@ import Image from "next/image";
 
 export function Loading() {
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm z-50 flex items-center justify-center transition-colors">
       <div className="relative">
         {/* Outer rotating ring */}
-        <div className="w-20 h-20 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+        <div className="w-20 h-20 border-4 border-blue-200 dark:border-blue-900/30 border-t-[#12498b] dark:border-t-blue-500 rounded-full animate-spin"></div>
 
         {/* Company Logo in center */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center overflow-hidden shadow-sm">
             <Image
-              src="/logo.png" // 🔹 Replace with your actual logo path
+              src="/logo.png"
               alt="MATT Logo"
               width={40}
               height={40}
@@ -93,16 +93,15 @@ export function LoadingSpinner({ size = "md", color = "blue" }: { size?: "sm" | 
   return (
     <div className="relative">
       <div
-        className={`${sizeClasses[size]} border-4 rounded-full animate-spin ${
-          color === "red" 
-            ? "border-red-200 border-t-[#b12222]" 
-            : "border-blue-200 border-t-[#12498b]"
-        }`}
+        className={`${sizeClasses[size]} border-4 rounded-full animate-spin ${color === "red"
+            ? "border-red-200 dark:border-red-900/30 border-t-[#b12222] dark:border-t-red-500"
+            : "border-blue-200 dark:border-blue-900/30 border-t-[#12498b] dark:border-t-blue-500"
+          }`}
       ></div>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="bg-white rounded-full flex items-center justify-center overflow-hidden p-1">
+        <div className="bg-white dark:bg-gray-800 rounded-full flex items-center justify-center overflow-hidden p-1 shadow-sm">
           <Image
-            src="/logo.png" // 🔹 Replace with your actual logo path
+            src="/logo.png"
             alt="MATT Logo"
             width={logoSizes[size]}
             height={logoSizes[size]}

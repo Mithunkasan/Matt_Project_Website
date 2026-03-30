@@ -16,7 +16,7 @@ export default function LandingPage() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950 transition-colors">
       <HeroSection session={session} />
       <StatsSection />
       <MissionVisionSection />

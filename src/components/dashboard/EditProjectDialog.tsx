@@ -1,98 +1,34 @@
-// "use client"
+"use client";
 
-// import { useState } from "react"
-// import { Button } from "@/components/ui/button"
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog"
-// import { Edit2 } from "lucide-react"
-// import { EditProjectForm } from "@/components/forms/EditProjectForm"
-
-// interface EditProjectDialogProps {
-//   project: any
-// }
-
-// export function EditProjectDialog({ project }: EditProjectDialogProps) {
-//   const [open, setOpen] = useState(false)
-
-//   return (
-//     <Dialog open={open} onOpenChange={setOpen}>
-//       <DialogTrigger asChild>
-//         <Button variant="secondary" size="sm" className="flex-1 bg-white text-[#12498b] hover:bg-gray-100">
-//           <Edit2 className="w-4 h-4 mr-1" />
-//           Edit
-//         </Button>
-//       </DialogTrigger>
-//       <DialogContent className="max-w-2xl">
-//         <DialogHeader>
-//           <DialogTitle>Edit Project</DialogTitle>
-//           <DialogDescription>Update the project details below</DialogDescription>
-//         </DialogHeader>
-//         <EditProjectForm project={project} onSuccess={() => setOpen(false)} />
-//       </DialogContent>
-//     </Dialog>
-//   )
-// }
-
-
-
-
-
-"use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Edit2 } from "lucide-react"
-import { EditProjectForm } from "@/components/forms/EditProjectForm"
-
-interface Project {
-  id: string
-  name: string
-  college: string
-  department: string
-  team: string
-  date: string
-  amountPaid: number
-  finalAmount: number
-  paymentProgress: number
-  status: string
-}
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { EditProjectForm } from "../../components/forms/EditProjectForm";
+import { Project } from "@/types";
 
 interface EditProjectDialogProps {
-  project: Project
+  project: Project | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onProjectUpdated: (id: string, updatedData: Partial<Project>) => void;
 }
 
-export function EditProjectDialog({ project }: EditProjectDialogProps) {
-  const [open, setOpen] = useState(false)
+export function EditProjectDialog({ project, open, onOpenChange, onProjectUpdated }: EditProjectDialogProps) {
+  if (!project) return null;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="flex-1 bg-white text-[#12498b] hover:bg-gray-100">
-          <Edit2 className="w-4 h-4 mr-1" />
-          Edit
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-2xl bg-white">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 bg-white dark:bg-gray-900 rounded-xl shadow-xl border dark:border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-gray-900">Edit Project</DialogTitle>
-          <DialogDescription className="text-gray-700">Update the project details below</DialogDescription>
+          <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">Edit Project: {project.name}</DialogTitle>
         </DialogHeader>
-        <EditProjectForm project={project} onSuccess={() => setOpen(false)} />
+
+        <div className="mt-4">
+          <EditProjectForm
+            project={project}
+            onProjectUpdated={onProjectUpdated}
+            onSuccess={() => onOpenChange(false)}
+          />
+        </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

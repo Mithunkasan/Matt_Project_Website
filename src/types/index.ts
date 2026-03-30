@@ -69,20 +69,3 @@ export interface ClassSchedule {
   updatedAt?: string
 }
 
-export interface Workshop {
-  id: string;
-  title: string;
-  description?: string;
-  college: string;
-  department: string;
-  organizer: string;
-  team: string;
-  date: string;
-  duration: string;
-  location: string;
-  attendees: number;
-  status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
-  fee?: number;
-  createdAt: string;
-  updatedAt: string;
-}

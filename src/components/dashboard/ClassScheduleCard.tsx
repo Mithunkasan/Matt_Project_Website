@@ -254,7 +254,7 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
   };
 
   return (
-    <Card className="bg-white shadow-lg hover:shadow-2xl transition-all duration-300 rounded-xl border-2 border-gray-200 overflow-hidden hover:border-[#b12222] h-full flex flex-col">
+    <Card className="bg-white dark:bg-gray-900 shadow-lg hover:shadow-2xl transition-all duration-300 rounded-xl border-2 border-gray-200 dark:border-gray-800 overflow-hidden hover:border-[#b12222] dark:hover:border-red-500 h-full flex flex-col">
       {/* Header Section with Accent Color */}
       <div className="bg-[#b12222] px-5 sm:px-6 py-4">
         {editing ? (
@@ -271,11 +271,11 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
         )}
       </div>
 
-      <CardContent className="p-5 sm:p-6 flex-grow flex flex-col">
+      <CardContent className="p-5 sm:p-6 flex-grow flex flex-col bg-white dark:bg-gray-900">
         {/* Day, Time, Location Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 pb-5 border-b border-gray-200">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 pb-5 border-b border-gray-200 dark:border-gray-800">
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-[#b12222] uppercase tracking-wide mb-1">
+            <span className="text-xs font-semibold text-[#b12222] dark:text-red-400 uppercase tracking-wide mb-1">
               Day
             </span>
             {editing ? (
@@ -283,16 +283,16 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                 type="text"
                 value={editData.day || ""}
                 onChange={(e) => handleInputChange("day", e.target.value)}
-                className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
               />
             ) : (
-              <p className="text-sm text-gray-800 font-medium break-words">
+              <p className="text-sm text-gray-800 dark:text-gray-200 font-medium break-words">
                 {classItem.day}
               </p>
             )}
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-[#b12222] uppercase tracking-wide mb-1">
+            <span className="text-xs font-semibold text-[#b12222] dark:text-red-400 uppercase tracking-wide mb-1">
               Time
             </span>
             {editing ? (
@@ -300,16 +300,16 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                 type="text"
                 value={editData.time || ""}
                 onChange={(e) => handleInputChange("time", e.target.value)}
-                className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
               />
             ) : (
-              <p className="text-sm text-gray-800 font-medium break-words">
+              <p className="text-sm text-gray-800 dark:text-gray-200 font-medium break-words">
                 {classItem.time}
               </p>
             )}
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-[#b12222] uppercase tracking-wide mb-1">
+            <span className="text-xs font-semibold text-[#b12222] dark:text-red-400 uppercase tracking-wide mb-1">
               Location
             </span>
             {editing ? (
@@ -317,10 +317,10 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                 type="text"
                 value={editData.location || ""}
                 onChange={(e) => handleInputChange("location", e.target.value)}
-                className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
               />
             ) : (
-              <p className="text-sm text-gray-800 font-medium break-words">
+              <p className="text-sm text-gray-800 dark:text-gray-200 font-medium break-words">
                 {classItem.location}
               </p>
             )}
@@ -328,9 +328,9 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
         </div>
 
         {/* Department and Faculty Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5 pb-5 border-b border-gray-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5 pb-5 border-b border-gray-200 dark:border-gray-800">
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-[#b12222] uppercase tracking-wide mb-1">
+            <span className="text-xs font-semibold text-[#b12222] dark:text-red-400 uppercase tracking-wide mb-1">
               Department
             </span>
             {editing ? (
@@ -338,16 +338,16 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                 type="text"
                 value={editData.department || ""}
                 onChange={(e) => handleInputChange("department", e.target.value)}
-                className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
               />
             ) : (
-              <p className="text-sm text-gray-800 font-medium break-words">
+              <p className="text-sm text-gray-800 dark:text-gray-200 font-medium break-words">
                 {classItem.department}
               </p>
             )}
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-[#b12222] uppercase tracking-wide mb-1">
+            <span className="text-xs font-semibold text-[#b12222] dark:text-red-400 uppercase tracking-wide mb-1">
               Faculty / Student
             </span>
             {editing ? (
@@ -357,18 +357,18 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                   value={editData.faculty || ""}
                   onChange={(e) => handleInputChange("faculty", e.target.value)}
                   placeholder="Faculty Name"
-                  className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                  className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
                 />
                 <input
                   type="email"
                   value={editData.studentEmail || ""}
                   onChange={(e) => handleInputChange("studentEmail", e.target.value)}
                   placeholder="Student Email"
-                  className="text-sm text-gray-800 font-medium border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-[#b12222]"
+                  className="text-sm text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700 rounded px-2 py-1 focus:outline-none focus:border-[#b12222] bg-white dark:bg-gray-800"
                 />
               </div>
             ) : (
-              <p className="text-sm text-gray-800 font-medium break-words">
+              <p className="text-sm text-gray-800 dark:text-gray-200 font-medium break-words">
                 {classItem.faculty}
               </p>
             )}
@@ -403,7 +403,7 @@ export function ClassScheduleCard({ classItem, onDelete, onUpdate }: ClassSchedu
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex-1 border-2 border-[#b12222] text-[#b12222] hover:bg-[#b12222] hover:text-white font-semibold transition-colors"
+                  className="flex-1 border-2 border-[#b12222] text-[#b12222] hover:bg-[#b12222] hover:text-white font-semibold transition-colors dark:border-red-500 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white"
                   onClick={handleEdit}
                 >
                   Edit

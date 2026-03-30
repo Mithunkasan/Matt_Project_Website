@@ -45,11 +45,11 @@ export function ServicesSection() {
     ];
 
     return (
-        <section id="services" className="py-24 bg-white">
+        <section id="services" className="py-24 bg-white dark:bg-gray-950 transition-colors">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">What We Do</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">What We Do</h2>
+                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
                         We design, develop, and deliver custom academic projects that meet university standards and industry trends.
                     </p>
                 </div>
@@ -66,18 +66,18 @@ export function ServicesSection() {
                             key={i}
                             variants={fadeInUp}
                             whileHover={{ y: -5 }}
-                            className="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+                            className="bg-gray-50 dark:bg-gray-900 p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-all duration-300 group"
                         >
                             <div className="flex justify-between items-start mb-6">
-                                <div className="w-14 h-14 bg-white text-[#12498b] rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <div className="w-14 h-14 bg-white dark:bg-gray-800 text-[#12498b] dark:text-blue-400 rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                                     {service.icon}
                                 </div>
-                                <span className="text-[10px] uppercase font-bold tracking-widest text-[#b12222] bg-[#b12222]/10 px-3 py-1 rounded-full">
+                                <span className="text-[10px] uppercase font-bold tracking-widest text-[#b12222] dark:text-red-400 bg-[#b12222]/10 dark:bg-red-400/10 px-3 py-1 rounded-full">
                                     {service.tag}
                                 </span>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">{service.desc}</p>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-[#12498b] dark:group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">{service.desc}</p>
                         </motion.div>
                     ))}
                 </motion.div>

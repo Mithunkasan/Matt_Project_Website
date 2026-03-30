@@ -107,22 +107,3 @@ model ClassSchedule {
 }
 
 
-model Workshop {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  college     String
-  department  String
-  organizer   String
-  team        String
-  date        DateTime
-  duration    String
-  location    String
-  attendees   Int
-  status      String   // upcoming, ongoing, completed, cancelled
-  fee         Float?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("workshops")
-}

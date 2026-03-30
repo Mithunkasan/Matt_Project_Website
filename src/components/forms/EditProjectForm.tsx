@@ -6,22 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Building2, Calendar, DollarSign } from "lucide-react"
-
-interface Project {
-  id: string
-  name?: string
-  college?: string
-  department?: string
-  team?: string
-  date?: string
-  status?: string
-  amountPaid?: number
-  finalAmount?: number
-}
+import { Project } from "@/types"
 
 interface EditProjectFormProps {
   project: Project
   onSuccess: () => void
+  onProjectUpdated?: (projectId: string, updatedData: Partial<Project>) => void
 }
 
 // Format number to INR format
@@ -33,7 +23,7 @@ const formatINR = (value: number): string => {
   }).format(value);
 };
 
-export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
+export function EditProjectForm({ project, onSuccess, onProjectUpdated }: EditProjectFormProps) {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: project.name || "",
@@ -103,6 +93,9 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
 
       if (response.ok) {
         alert("Project updated successfully")
+        if (onProjectUpdated) {
+          onProjectUpdated(project.id, formData)
+        }
         onSuccess()
       } else {
         alert("Failed to update project")
@@ -117,18 +110,18 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
   const paymentProgress = formData.finalAmount > 0 ? Math.round((formData.amountPaid / formData.finalAmount) * 100) : 0
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-lg p-6">
-      <div className="bg-gradient-to-r from-[#12498b]/5 to-transparent p-4 rounded-lg border-l-4 border-[#12498b] mb-6">
-        <h3 className="font-semibold text-gray-900 mb-1 flex items-center gap-2">
-          <Building2 className="w-5 h-5 text-[#12498b]" />
+    <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-gray-900 rounded-lg p-6 transition-colors">
+      <div className="bg-gradient-to-r from-[#12498b]/5 to-transparent dark:from-blue-900/10 p-4 rounded-lg border-l-4 border-[#12498b] dark:border-blue-500 mb-6">
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-1 flex items-center gap-2">
+          <Building2 className="w-5 h-5 text-[#12498b] dark:text-blue-400" />
           Edit Project Information
         </h3>
-        <p className="text-sm text-gray-600">Update project details and payment information</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">Update project details and payment information</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-sm font-semibold text-black">
+          <Label htmlFor="name" className="text-sm font-semibold text-black dark:text-gray-200">
             Project Name <span className="text-red-500">*</span>
           </Label>
           <Input
@@ -137,13 +130,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             placeholder="Project Name"
             value={formData.name}
             onChange={handleChange}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="college" className="text-sm font-semibold text-black">
+          <Label htmlFor="college" className="text-sm font-semibold text-black dark:text-gray-200">
             College <span className="text-red-500">*</span>
           </Label>
           <Input
@@ -152,13 +145,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             placeholder="College"
             value={formData.college}
             onChange={handleChange}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="department" className="text-sm font-semibold text-black">
+          <Label htmlFor="department" className="text-sm font-semibold text-black dark:text-gray-200">
             Department <span className="text-red-500">*</span>
           </Label>
           <Input
@@ -167,13 +160,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             placeholder="Department"
             value={formData.department}
             onChange={handleChange}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="team" className="text-sm font-semibold text-black">
+          <Label htmlFor="team" className="text-sm font-semibold text-black dark:text-gray-200">
             Team <span className="text-red-500">*</span>
           </Label>
           <Input
@@ -182,13 +175,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             placeholder="Team"
             value={formData.team}
             onChange={handleChange}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="date" className="text-sm font-semibold text-black flex items-center gap-2">
+          <Label htmlFor="date" className="text-sm font-semibold text-black dark:text-gray-200 flex items-center gap-2">
             <Calendar className="w-4 h-4" />
             Project Date <span className="text-red-500">*</span>
           </Label>
@@ -198,13 +191,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             type="date"
             value={formData.date}
             onChange={handleChange}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="status" className="text-sm font-semibold text-black">
+          <Label htmlFor="status" className="text-sm font-semibold text-black dark:text-gray-200">
             Status
           </Label>
           <select
@@ -212,7 +205,7 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full h-11 px-3 border border-gray-300 rounded-md bg-white text-black focus:border-[#12498b] focus:ring-2 focus:ring-[#12498b]/20 outline-none transition-all cursor-pointer"
+            className="w-full h-11 px-3 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-black dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-2 focus:ring-[#12498b]/20 outline-none transition-all cursor-pointer"
           >
             <option value="pending">Pending</option>
             <option value="ongoing">Ongoing</option>
@@ -221,7 +214,7 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="amountPaid" className="text-sm font-semibold text-black flex items-center gap-2">
+          <Label htmlFor="amountPaid" className="text-sm font-semibold text-black dark:text-gray-200 flex items-center gap-2">
             <DollarSign className="w-4 h-4" />
             Amount Paid (INR)
           </Label>
@@ -236,13 +229,13 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
                 setFormData(prev => ({ ...prev, amountPaid: 0 }));
               }
             }}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             placeholder="₹0"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="finalAmount" className="text-sm font-semibold text-black flex items-center gap-2">
+          <Label htmlFor="finalAmount" className="text-sm font-semibold text-black dark:text-gray-200 flex items-center gap-2">
             <DollarSign className="w-4 h-4" />
             Final Amount (INR)
           </Label>
@@ -257,7 +250,7 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
                 setFormData(prev => ({ ...prev, finalAmount: 0 }));
               }
             }}
-            className="h-11 border-gray-300 focus:border-[#12498b] focus:ring-[#12498b]/20 transition-all text-black"
+            className="h-11 border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:border-[#12498b] dark:focus:border-blue-500 focus:ring-[#12498b]/20 transition-all text-black"
             placeholder="₹0"
           />
         </div>
@@ -265,12 +258,12 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
         {formData.finalAmount > 0 && (
           <div className="sm:col-span-2 space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600 font-medium">Payment Progress</span>
-              <span className="font-semibold text-[#12498b]">{paymentProgress}%</span>
+              <span className="text-gray-600 dark:text-gray-400 font-medium">Payment Progress</span>
+              <span className="font-semibold text-[#12498b] dark:text-blue-400">{paymentProgress}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
               <div
-                className="bg-gradient-to-r from-[#12498b] to-[#1a5ba8] h-3 rounded-full transition-all duration-300 flex items-center justify-end pr-2"
+                className="bg-gradient-to-r from-[#12498b] to-[#1a5ba8] dark:from-blue-600 dark:to-blue-400 h-3 rounded-full transition-all duration-300 flex items-center justify-end pr-2"
                 style={{ width: `${Math.min(paymentProgress, 100)}%` }}
               >
                 {paymentProgress > 10 && (
@@ -282,11 +275,11 @@ export function EditProjectForm({ project, onSuccess }: EditProjectFormProps) {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4 border-t border-gray-200">
+      <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4 border-t border-gray-200 dark:border-gray-800">
         <Button
           type="submit"
           disabled={loading}
-          className="w-full sm:w-auto bg-[#12498b] hover:bg-[#0d3566]"
+          className="w-full sm:w-auto bg-[#12498b] dark:bg-blue-600 hover:bg-[#0d3566] dark:hover:bg-blue-700 text-white"
         >
           {loading ? "Updating..." : "Update Project"}
         </Button>

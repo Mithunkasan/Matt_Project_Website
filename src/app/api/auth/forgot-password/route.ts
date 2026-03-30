@@ -1,6 +1,6 @@
 // app/api/auth/forgot-password/route.ts
 import { NextResponse } from 'next/server';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { sendPasswordResetEmail } from '@/lib/nodemailer';
 
 // In-memory token storage (use database in production)
@@ -30,14 +30,14 @@ export async function POST(request: Request) {
     const expires = Date.now() + 3600000; // 1 hour
 
     // Store token
-    resetTokens.set(token, { 
-      email, 
+    resetTokens.set(token, {
+      email,
       expires,
       createdAt: new Date().toISOString()
     });
 
     // Create reset link
-    const resetLink = `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
+    const resetLink = `${process.env.NEXTAUTH_URL || 'https://matt-projects-dashboard-3jae.vercel.app'}/reset-password?token=${token}`;
 
     console.log('Sending reset email to:', email);
     console.log('Reset link:', resetLink);
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 
     if (!emailResult.success) {
       console.error('Email sending failed:', emailResult.error);
-      
+
       // For development: return the reset link directly
       if (process.env.NODE_ENV === 'development') {
         return NextResponse.json({
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
           resetLink: resetLink
         });
       }
-      
+
       return NextResponse.json(
         { error: 'Failed to send reset email. Please try again.' },
         { status: 500 }
@@ -82,12 +82,12 @@ export async function POST(request: Request) {
 export function isValidToken(token: string) {
   const tokenData = resetTokens.get(token);
   if (!tokenData) return false;
-  
+
   if (Date.now() > tokenData.expires) {
     resetTokens.delete(token);
     return false;
   }
-  
+
   return true;
 }
 

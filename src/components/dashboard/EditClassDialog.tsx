@@ -1,96 +1,34 @@
-// "use client"
+"use client";
 
-// import { useState } from "react"
-// import { Button } from "@/components/ui/button"
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog"
-// import { Edit2 } from "lucide-react"
-// import { EditClassForm } from "../forms/EditClassForm"
-
-// interface EditClassDialogProps {
-//   classSchedule: any
-// }
-
-// export function EditClassDialog({ classSchedule }: EditClassDialogProps) {
-//   const [open, setOpen] = useState(false)
-
-//   return (
-//     <Dialog open={open} onOpenChange={setOpen}>
-//       <DialogTrigger asChild>
-//         <Button variant="secondary" size="sm" className="flex-1 bg-white text-[#b12222] hover:bg-gray-100">
-//           <Edit2 className="w-4 h-4 mr-1" />
-//           Edit
-//         </Button>
-//       </DialogTrigger>
-//       <DialogContent className="max-w-2xl">
-//         <DialogHeader>
-//           <DialogTitle>Edit Class Schedule</DialogTitle>
-//           <DialogDescription>Update the class schedule details below</DialogDescription>
-//         </DialogHeader>
-//         <EditClassForm classSchedule={classSchedule} onSuccess={() => setOpen(false)} />
-//       </DialogContent>
-//     </Dialog>
-//   )
-// }
-
-
-
-
-
-"use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Edit2 } from "lucide-react"
-import { EditClassForm } from "../forms/EditClassForm"
-
-interface ClassSchedule {
-  id: string
-  project: string
-  department: string
-  date: string
-  time: string
-  faculty: string
-  location: string
-  day: string
-}
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { EditClassForm } from "../../components/forms/EditClassForm";
+import { ClassSchedule } from "@/types";
 
 interface EditClassDialogProps {
-  classSchedule: ClassSchedule
+  classItem: ClassSchedule | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onClassUpdated: (id: string, updatedData: Partial<ClassSchedule>) => void;
 }
 
-export function EditClassDialog({ classSchedule }: EditClassDialogProps) {
-  const [open, setOpen] = useState(false)
+export function EditClassDialog({ classItem, open, onOpenChange, onClassUpdated }: EditClassDialogProps) {
+  if (!classItem) return null;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="secondary" size="sm" className="flex-1 bg-white text-[#b12222] hover:bg-gray-100">
-          <Edit2 className="w-4 h-4 mr-1" />
-          Edit
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-2xl bg-white">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 bg-white dark:bg-gray-900 rounded-xl shadow-xl border dark:border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-gray-900">Edit Class Schedule</DialogTitle>
-          <DialogDescription className="text-gray-700">Update the class schedule details below</DialogDescription>
+          <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">Edit Class Schedule: {classItem.project}</DialogTitle>
         </DialogHeader>
-        <EditClassForm classSchedule={classSchedule} onSuccess={() => setOpen(false)} />
+
+        <div className="mt-4">
+          <EditClassForm
+            classSchedule={classItem}
+            onClassUpdated={onClassUpdated}
+            onSuccess={() => onOpenChange(false)}
+          />
+        </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

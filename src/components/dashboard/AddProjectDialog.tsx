@@ -27,9 +27,9 @@ export function AddProjectDialog({ onProjectAdded }: AddProjectDialogProps) {
           Add Project
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 bg-white rounded-xl shadow-xl">
+      <DialogContent className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 bg-white dark:bg-gray-900 rounded-xl shadow-xl border dark:border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-gray-900">Add New Project</DialogTitle>
+          <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">Add New Project</DialogTitle>
         </DialogHeader>
 
         {/* Form container */}

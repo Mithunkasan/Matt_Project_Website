@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Dashboard - MATT Project Solutions',
-  description: 'Manage your projects, classes, and workshops',
+  description: 'Manage your projects and classes',
 };
 
 export default function DashboardLayout({
